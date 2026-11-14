@@ -53,3 +53,8 @@ android/build/
 key.properties
 test_gemini.dart
 test_*.dart
+
+# Firebase client configuration
+android/app/google-services.json
+lib/firebase_options.dart
+firebase.json
