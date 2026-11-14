@@ -16,13 +16,33 @@ class ExpenseModel {
   });
 
   factory ExpenseModel.fromMap(Map<String, dynamic> map, String id) {
+    DateTime parsedDate;
+    final d = map['date'];
+    if (d is DateTime) {
+      parsedDate = d;
+    } else if (d != null && d.runtimeType.toString().contains('Timestamp')) {
+      parsedDate = (d as dynamic).toDate();
+    } else if (d is String) {
+      parsedDate = DateTime.tryParse(d) ?? DateTime.now();
+    } else {
+      parsedDate = DateTime.now();
+    }
+
+    final rawAmount = map['amount'];
+    double parsedAmount = 0.0;
+    if (rawAmount is num) {
+      parsedAmount = rawAmount.toDouble();
+    } else if (rawAmount is String) {
+      parsedAmount = double.tryParse(rawAmount) ?? 0.0;
+    }
+
     return ExpenseModel(
       id: id,
-      caseId: map['caseId'] ?? '',
-      title: map['title'] ?? '',
-      amount: (map['amount'] ?? 0).toDouble(),
-      date: map['date'] != null ? DateTime.parse(map['date']) : DateTime.now(),
-      category: map['category'] ?? 'Other',
+      caseId: map['caseId']?.toString() ?? '',
+      title: map['title']?.toString() ?? '',
+      amount: parsedAmount,
+      date: parsedDate,
+      category: map['category']?.toString() ?? 'Other',
     );
   }
 

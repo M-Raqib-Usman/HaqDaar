@@ -8,9 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:haqdaar/main.dart' hide HaqDaarApp;
-
-import '../lib/main.dart';
+import 'package:haqdaar/main.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {

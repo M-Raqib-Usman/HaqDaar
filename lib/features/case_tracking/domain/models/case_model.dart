@@ -18,16 +18,26 @@ class CaseModel {
   });
 
   factory CaseModel.fromMap(Map<String, dynamic> map, String id) {
+    DateTime parsedHearingDate;
+    final d = map['nextHearingDate'];
+    if (d is DateTime) {
+      parsedHearingDate = d;
+    } else if (d != null && d.runtimeType.toString().contains('Timestamp')) {
+      parsedHearingDate = (d as dynamic).toDate();
+    } else if (d is String) {
+      parsedHearingDate = DateTime.tryParse(d) ?? DateTime.now();
+    } else {
+      parsedHearingDate = DateTime.now();
+    }
+
     return CaseModel(
       id: id,
-      title: map['title'] ?? '',
-      description: map['description'] ?? '',
-      status: map['status'] ?? 'Pending',
-      nextHearingDate: map['nextHearingDate'] != null 
-          ? DateTime.parse(map['nextHearingDate']) 
-          : DateTime.now(),
-      courtName: map['courtName'] ?? '',
-      lawyerName: map['lawyerName'] ?? '',
+      title: map['title']?.toString() ?? '',
+      description: map['description']?.toString() ?? '',
+      status: map['status']?.toString() ?? 'Pending',
+      nextHearingDate: parsedHearingDate,
+      courtName: map['courtName']?.toString() ?? '',
+      lawyerName: map['lawyerName']?.toString() ?? '',
     );
   }
 

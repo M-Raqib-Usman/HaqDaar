@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
-import '../../../../features/home/presentation/screens/home_dashboard_screen.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:haqdaar/core/localization/locale_provider.dart';
+import 'package:haqdaar/features/home/presentation/screens/home_dashboard_screen.dart';
 
-class LanguageSetupScreen extends StatefulWidget {
+class LanguageSetupScreen extends ConsumerStatefulWidget {
   const LanguageSetupScreen({super.key});
 
   @override
-  State<LanguageSetupScreen> createState() => _LanguageSetupScreenState();
+  ConsumerState<LanguageSetupScreen> createState() => _LanguageSetupScreenState();
 }
 
-class _LanguageSetupScreenState extends State<LanguageSetupScreen> {
-  String _selectedLanguage = 'English';
+class _LanguageSetupScreenState extends ConsumerState<LanguageSetupScreen> {
+  String _selectedLanguage = 'en';
 
   @override
   Widget build(BuildContext context) {
@@ -29,25 +31,46 @@ class _LanguageSetupScreenState extends State<LanguageSetupScreen> {
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 32),
-              RadioListTile<String>(
-                title: const Text('English'),
-                value: 'English',
-                groupValue: _selectedLanguage,
-                onChanged: (value) {
-                  setState(() {
-                    _selectedLanguage = value!;
-                  });
-                },
+              Card(
+                elevation: 0,
+                color: _selectedLanguage == 'en' ? Colors.green.shade50 : Colors.grey.shade50,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  side: BorderSide(
+                    color: _selectedLanguage == 'en' ? Colors.green.shade800 : Colors.grey.shade300,
+                    width: _selectedLanguage == 'en' ? 2 : 1,
+                  ),
+                ),
+                child: ListTile(
+                  leading: Icon(
+                    Icons.check_circle,
+                    color: _selectedLanguage == 'en' ? Colors.green.shade800 : Colors.grey.shade400,
+                  ),
+                  title: const Text('English', style: TextStyle(fontWeight: FontWeight.bold)),
+                  subtitle: const Text('Continue in English'),
+                  onTap: () => setState(() => _selectedLanguage = 'en'),
+                ),
               ),
-              RadioListTile<String>(
-                title: const Text('اردو (Urdu)'),
-                value: 'Urdu',
-                groupValue: _selectedLanguage,
-                onChanged: (value) {
-                  setState(() {
-                    _selectedLanguage = value!;
-                  });
-                },
+              const SizedBox(height: 12),
+              Card(
+                elevation: 0,
+                color: _selectedLanguage == 'ur' ? Colors.green.shade50 : Colors.grey.shade50,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  side: BorderSide(
+                    color: _selectedLanguage == 'ur' ? Colors.green.shade800 : Colors.grey.shade300,
+                    width: _selectedLanguage == 'ur' ? 2 : 1,
+                  ),
+                ),
+                child: ListTile(
+                  leading: Icon(
+                    Icons.check_circle,
+                    color: _selectedLanguage == 'ur' ? Colors.green.shade800 : Colors.grey.shade400,
+                  ),
+                  title: const Text('اردو (Urdu)', style: TextStyle(fontWeight: FontWeight.bold)),
+                  subtitle: const Text('اردو میں جاری رکھیں'),
+                  onTap: () => setState(() => _selectedLanguage = 'ur'),
+                ),
               ),
               const SizedBox(height: 48),
               ElevatedButton(
@@ -55,15 +78,22 @@ class _LanguageSetupScreenState extends State<LanguageSetupScreen> {
                   backgroundColor: Colors.green.shade800,
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
                 onPressed: () {
-                  // TODO: Save language preference
-                  Navigator.pushReplacement(
+                  ref.read(localeProvider.notifier).setLocale(_selectedLanguage);
+                  Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(builder: (_) => const HomeDashboardScreen()),
+                    (route) => false,
                   );
                 },
-                child: const Text('Continue / آگے بڑھیں'),
+                child: const Text(
+                  'Continue / آگے بڑھیں',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
               ),
             ],
           ),

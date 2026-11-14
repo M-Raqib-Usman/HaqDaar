@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "215410239263",
+    "project_id": "haqdaar-efef6",
+    "storage_bucket": "haqdaar-efef6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:215410239263:android:c96bc0c4180ef7b338722a",
+        "android_client_info": {
+          "package_name": "com.example.haqdaar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "215410239263-23u6gfcsccn8gfertg02lp3mlltnpu7d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.haqdaar",
+            "certificate_hash": "483844efd16bfbda85a7b6f50253e9e52b40806c"
+          }
+        },
+        {
+          "client_id": "215410239263-5p8abd8pr6nnbt2iii912834oamonbov.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDP6QrgDKgVgyRf5g02X9pL35lyn9nPwW4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "215410239263-5p8abd8pr6nnbt2iii912834oamonbov.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "215410239263-hn2ma0vqdjvcsd4dvqvfrmkolgrn7cqa.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.haqdaar"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
